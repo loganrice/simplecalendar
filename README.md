@@ -8,7 +8,8 @@ A jQuery plugin that creates a simple month calendar.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'simplecalendar'
+gem 'simplecalendar', :github => 'loganrice/simplecalendar'
+
 ```
 
 And then execute:
