@@ -1,0 +1,84 @@
+$border-color: #E1E1E1;
+$border-size: 1px;
+$day-height: 50px;
+$day-width: 50px;
+$default-text-color: #999999;
+$event-background-color: #004CCC;
+$default-font-size: 9px;
+$default-font-family: Helvetica;
+$days-of-the-week-text-color: #333333;
+
+@mixin day($text-color) {
+ font-family: $default-font-family;
+ font-size: $default-font-size;
+ position: relative;
+ display: inline-block;
+ padding-right: 5px;
+ box-sizing: border-box;
+ border-top: $border-size solid $border-color;
+ border-right: $border-size solid $border-color;
+ width: $day-width;
+ height: 100%;
+ color: $text-color;
+ &:nth-last-child(-n+2) {
+  border-right: $border-size solid $border-color;
+  color: #C58080;
+ }
+}
+
+.month {
+ display: inline-block;
+ margin-left: 15px;
+
+ h1 {
+  text-align: center;
+  color: white;
+  background: $event-background-color;
+  padding: 5px;
+ }
+}
+
+
+
+.days-of-the-week {
+  font-size: 0;
+  text-align: center;
+  div {
+    @include day($days-of-the-week-text-color);
+    overflow: hidden;
+    &:nth-last-child(-n+2) {
+      color: $days-of-the-week-text-color;
+    }
+  }
+}
+
+.week {
+ height: $day-height;
+ white-space: nowrap;
+ font-size: 0;
+ &:last-child {
+  border-bottom: $border-size solid $border-color;
+ }
+}
+
+
+.day {
+  @include day($default-text-color);
+}
+
+
+.day__number {
+  float: right;
+  font-size: $default-font-size;
+}
+
+.events {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  font-size: 15px;
+  div {
+    min-width: 12px;
+    min-height: 12px;
+  }
+}
