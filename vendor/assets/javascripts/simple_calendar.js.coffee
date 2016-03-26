@@ -66,13 +66,16 @@ SimpleCalendarView =
     ]
     months[month]
 
-    switch month
-      when 0
-        month_text = "January"
-      when 1
-        month_text = "February"
   header: (month) ->
-    "<h1>#{@fetchMonth(month)}</h1>
+    "<h1>
+      <button id='calendar-prev-month' class='btn btn-default btn-small pull-left'>
+        <span class='glyphicon glyphicon-menu-left'></span>
+      </button>
+      #{@fetchMonth(month)}
+      <button id='calendar-next-month' class='btn btn-default btn-small pull-right'>
+        <span class='glyphicon glyphicon-menu-right'></span>
+      </button>
+    </h1>
     <div class='days-of-the-week'>
       <div>Mon</div>
       <div>Tue</div>
@@ -203,6 +206,7 @@ class SimpleCalendar
   constructor: (@year, @month) ->
     # subtract 1, date objects months start at 0#
     @month = @month - 1
+
     @events = new SimpleCalendarEvent(@year, @month)
 
   render: ->
@@ -250,7 +254,8 @@ $.fn.extend
                  # "2/29/2016": "1"
                # }]
     # }
-
+    options.year = new Date().getFullYear() unless options.year?
+    options.month = (new Date().getMonth()) + 1 unless options.month?
     calendar = new SimpleCalendar(options.year, options.month)
     calendar.add(options.events)
     
